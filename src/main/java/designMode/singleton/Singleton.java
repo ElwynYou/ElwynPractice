@@ -23,7 +23,7 @@ public class Singleton {
 	}
 
 	/* 如果该对象被用于序列化，可以保证对象在序列化前后保持一致 */
-	public Object readResolve() {
+	private Object readResolve() {
 		return getInstance();
 	}
 

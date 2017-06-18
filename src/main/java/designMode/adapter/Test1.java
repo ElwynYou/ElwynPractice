@@ -49,4 +49,14 @@ public class Test1 {
 		source2.method1();
 		source2.method2();
 	}
+
+	@Test
+	public void testLong(){
+		long sum=0L;
+		for (long i = 0; i < Integer.MAX_VALUE; i++) {
+			sum+=i;
+
+		}
+		System.out.println(sum);
+	}
 }
