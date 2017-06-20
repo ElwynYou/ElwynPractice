@@ -10,6 +10,6 @@ package designMode.abstractFactory;
 public class SmsSender implements Sender {
 	@Override
 	public void send() {
-		System.out.println("this is mail SmsSender");
+		System.out.println("this is sms Sender");
 	}
 }

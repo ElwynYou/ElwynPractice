@@ -10,7 +10,8 @@ package designMode.proxy;
 public class test1 {
 
 	public static void main(String[] args) {
-		Source source=new Proxy();
+		Source source1=new SourceImpl();
+		Source source=new Proxy(source1);
 		source.method1();
 	}
 }

@@ -10,9 +10,9 @@ package designMode.proxy;
 public class Proxy implements Source {
 	private Source source;
 
-	public Proxy(){
+	public Proxy(Source source){
 		super();
-		this.source=new SourceImpl();
+		this.source=source;
 	}
 
 
