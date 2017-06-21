@@ -1,5 +1,9 @@
 package designMode.singleton;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  * @Package designMode.singleton
  * @Description: //todo(用一句话描述该文件做什么)
@@ -9,9 +13,12 @@ package designMode.singleton;
  */
 public class TestSing {
     public static void main(String[] args) {
-        Resource instance = SingletonEnum.INSTANCE.getInstance();
-        Resource instance1 = SingletonEnum.INSTANCE.getInstance();
-        System.out.println(instance);
-        System.out.println(instance1);
+        Connection connection = JDBCUtilSingle.INSTANCE.getConnection();
+        Statement statement;
+        try {
+             statement = connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
