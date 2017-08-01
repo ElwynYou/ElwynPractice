@@ -1,10 +1,10 @@
-package hive;
+package hadoop.hive;
 
 import org.apache.hadoop.hive.ql.exec.UDF;
 import org.apache.hadoop.io.Text;
 
 /**
- * @Package hive
+ * @Package hadoop.hive
  * @Description: //todo(用一句话描述该文件做什么)
  * @Author elwyn
  * @Date 2017/7/13 0:14
