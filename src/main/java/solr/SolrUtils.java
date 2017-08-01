@@ -125,7 +125,6 @@ public class SolrUtils {
 		SolrQuery solrQuery = new SolrQuery();
 		StringBuilder query = new StringBuilder();
 		SolrDocumentList results=new SolrDocumentList();
-
 		Field[] declaredFields = clazz.getDeclaredFields();
 		try {
 			for (Field field : declaredFields) {
