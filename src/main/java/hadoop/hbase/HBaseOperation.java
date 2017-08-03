@@ -21,7 +21,7 @@ public class HBaseOperation {
     public static HTable getHTableByTableName(String tableName) throws IOException {
         //读配置文件
         Configuration configuration = HBaseConfiguration.create();
-        configuration.set("hadoop.hbase.zookeeper.quorum", "hadoop-senior.ibeifeng.com");  //增加了这项
+        configuration.set("hbase.zookeeper.quorum", "hadoop-senior.ibeifeng.com");  //增加了这项
         //得到表的实例
         HTable table = new HTable(configuration, tableName);
         return table;

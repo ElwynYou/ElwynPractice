@@ -17,10 +17,11 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-	<!--<property>
+	<property>
 		<name>fs.replication</name>
 		<value>1</value>
 	</property>
+	<!--
 	<property>
 		<name>dfs.namenode.secondary.http-address</name>
 		<value>hadoop-senior.ibeifeng.com:50090</value>

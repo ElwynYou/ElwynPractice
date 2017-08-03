@@ -17,8 +17,14 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-	<property>
+	<!--<property>
 		<name>fs.defaultFS</name>
 		<value>hdfs://hadoop-master.nebuinfo.com:8020</value>
+	</property>-->
+	<property>
+		<name>fs.defaultFS</name>
+		<value>hdfs://hadoop-senior.ibeifeng.com:8020</value>
 	</property>
+
+
 </configuration>
