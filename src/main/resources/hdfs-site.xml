@@ -17,12 +17,17 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-	<property>
+	<!--<property>
 		<name>fs.replication</name>
 		<value>1</value>
 	</property>
 	<property>
 		<name>dfs.namenode.secondary.http-address</name>
 		<value>hadoop-senior.ibeifeng.com:50090</value>
+	</property>-->
+	<property>
+		<!-- 是否对DFS中的文件进行权限控制(测试中一般用false)-->
+		<name>dfs.permissions</name>
+		<value>false</value>
 	</property>
 </configuration>

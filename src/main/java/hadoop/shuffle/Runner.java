@@ -52,14 +52,16 @@ public class Runner {
                     stringBuffer = new StringBuffer();
                     stringBuffer.append(value.get()).append(",");
                 }
-                context.write(new IntWritable(preKey), new Text(stringBuffer.toString()));
             }
+            context.write(new IntWritable(preKey), new Text(stringBuffer.toString()));
+
         }
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         Configuration configuration = new Configuration();
-        configuration.set("fs.defaultFs", "hdfs://192.168.100.120");
+        configuration.set("fs.defaultFS","hdfs://hadoop-master.nebuinfo.com:8020");
+        System.setProperty("HADOOP_USER_NAME", "yunchen");
 
         Job job = Job.getInstance(configuration, "demo-job");
 
@@ -77,8 +79,8 @@ public class Runner {
         job.setPartitionerClass(IntPairPartitioner.class);
         job.setNumReduceTasks(2);
 
-        FileInputFormat.addInputPaths(job, "/beifeng/07/input");
-        FileOutputFormat.setOutputPath(job, new Path("beifeng/07/output"));
+        FileInputFormat.setInputPaths(job, "/user/yunchen/mapreduce/shuffle/input");
+        FileOutputFormat.setOutputPath(job, new Path("/user/yunchen/mapreduce/shuffle/output"));
         job.waitForCompletion(true);
     }
 }

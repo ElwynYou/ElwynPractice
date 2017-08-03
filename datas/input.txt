@@ -1,0 +1,5 @@
+hadoop yarn
+hdfs dfs
+list hadoop
+zookeeper sqoop
+hadoop hive

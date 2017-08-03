@@ -23,7 +23,7 @@ public class IntPairPartitioner extends Partitioner<IntPair, IntWritable> {
                 //是偶数，需要第二个reducer进行处理
                 return 1;
             } else {
-                //是奇数，所以需要第一个reducer进行处理，返回值是从0岛num-1的一个范围
+                //是奇数，所以需要第一个reducer进行处理，返回值是从0到num-1的一个范围
                 return 0;
             }
         } else {

@@ -19,10 +19,6 @@
 <configuration>
 	<property>
 		<name>fs.defaultFS</name>
-		<value>hdfs://hadoop-senior.ibeifeng.com:8020</value>
-	</property>
-	<property>
-		<name>hadoop.tmp.dir</name>
-		<value>/opt/modules/hadoop-2.5.0/data/tmp</value>
+		<value>hdfs://hadoop-master.nebuinfo.com:8020</value>
 	</property>
 </configuration>

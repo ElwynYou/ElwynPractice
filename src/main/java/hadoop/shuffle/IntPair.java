@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  * @Package hadoop.shuffle
- * @Description: //todo(用一句话描述该文件做什么)
+ * @Description: 自定义shuffle阶段
  * @Author elwyn
  * @Date 2017/8/2 21:28
  * @Email elonyong@163.com
@@ -16,6 +16,9 @@ import java.io.IOException;
 public class IntPair implements WritableComparable<IntPair> {
     private int first;
     private int second;
+
+    public IntPair() {
+    }
 
     public IntPair(int first, int second) {
         this.first = first;
