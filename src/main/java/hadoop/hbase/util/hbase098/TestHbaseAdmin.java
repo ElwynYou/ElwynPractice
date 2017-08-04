@@ -1,6 +1,6 @@
-package hadoop.hbase;
+package hadoop.hbase.util.hbase098;
 
-import hadoop.hbase.util.HbaseUtil;
+import hadoop.hbase.util.hbase098.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
@@ -21,7 +21,7 @@ public class TestHbaseAdmin {
         Configuration hBaseConfiguration = HbaseUtil.getHBaseConfiguration();
         HBaseAdmin hBaseAdmin = new HBaseAdmin(hBaseConfiguration);
         try {
-            testGetTableDescribe(hBaseAdmin);
+            testCreateTable(hBaseAdmin);
 
         } finally {
             hBaseAdmin.close();
@@ -33,7 +33,7 @@ public class TestHbaseAdmin {
         TableName tableName = TableName.valueOf("users");
         HTableDescriptor hTableDescripto = new HTableDescriptor(tableName);
         hTableDescripto.addFamily(new HColumnDescriptor("f"));
-        hTableDescripto.setMaxFileSize(10000L);
+       // hTableDescripto.setMaxFileSize(10000L);
         hBaseAdmin.createTable(hTableDescripto);
         System.out.println("创建表成功");
 

@@ -1,4 +1,4 @@
-package hadoop.hbase.util;
+package hadoop.hbase.util.hbase098;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -14,7 +14,7 @@ public class HbaseUtil {
     public static Configuration getHBaseConfiguration(){
         Configuration configuration = HBaseConfiguration.create();
         //如果没有hbase-site.xml配置文件可以通过代码直接指定zookeeper的服务地址
-        configuration.set("hbase.zookeeper.quorum", "hadoop-senior.ibeifeng.com");
+        configuration.set("hbase.zookeeper.quorum", "hadoop-master.nebuinfo.com");
         return configuration;
     }
 }
