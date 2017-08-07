@@ -26,9 +26,9 @@
 		<name>dfs.namenode.secondary.http-address</name>
 		<value>hadoop-senior.ibeifeng.com:50090</value>
 	</property>-->
-	<property>
-		<!-- 是否对DFS中的文件进行权限控制(测试中一般用false)-->
+	<!--<property>
+		&lt;!&ndash; 是否对DFS中的文件进行权限控制(测试中一般用false)&ndash;&gt;
 		<name>dfs.permissions</name>
 		<value>false</value>
-	</property>
+	</property>-->
 </configuration>

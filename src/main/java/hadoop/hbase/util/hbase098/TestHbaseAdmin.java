@@ -21,7 +21,7 @@ public class TestHbaseAdmin {
         Configuration hBaseConfiguration = HbaseUtil.getHBaseConfiguration();
         HBaseAdmin hBaseAdmin = new HBaseAdmin(hBaseConfiguration);
         try {
-            testCreateTable(hBaseAdmin);
+            testDelTableDescribe(hBaseAdmin);
 
         } finally {
             hBaseAdmin.close();
@@ -52,7 +52,7 @@ public class TestHbaseAdmin {
     }
 
     static void testDelTableDescribe(HBaseAdmin hBaseAdmin) throws IOException {
-        TableName tableName = TableName.valueOf("users");
+        TableName tableName = TableName.valueOf("data");
         if (hBaseAdmin.tableExists(tableName)) { //判断表是否存在
             if (hBaseAdmin.isTableEnabled(tableName)) {//判断表的状态是enable还是disable
                 hBaseAdmin.disableTable(tableName);
