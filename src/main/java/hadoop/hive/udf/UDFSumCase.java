@@ -49,6 +49,8 @@ public class UDFSumCase extends AbstractGenericUDAFResolver {
         }
     }
 
+
+
     static class SumLongEvluator extends GenericUDAFEvaluator {
         private PrimitiveObjectInspector primitiveObjectInspector;
 
