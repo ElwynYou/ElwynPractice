@@ -1,4 +1,4 @@
-﻿package shiro.realms;
+package shiro.realms;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-﻿package shiro.services;
+package shiro.services;
 
 import java.util.Date;
 
