@@ -23,9 +23,9 @@
         </jdbcConnection>-->
         <!--oracle-->
         <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
-                        connectionURL="jdbc:oracle:thin:@192.168.60.96:1521/rsdb"
-                        userId="gz_inner"
-                        password="rain_soft2013">
+                        connectionURL="jdbc:oracle:thin:@192.168.241.11:1521/rsdb"
+                        userId="mobmanage"
+                        password="rainsoft">
         </jdbcConnection>
 
 
@@ -47,14 +47,17 @@
 
         <!-- mybatis3中的mapper接口 -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="mybatisGen.dao" targetProject="src/main/java">
-            <property name="enableSubPackages" value="true"/>
+            <property name="enableSubPackages" value="false"/>
+
         </javaClientGenerator>
 
         <!-- 数据表进行生成操作 schema:相当于库名; tableName:表名; domainObjectName:对应的DO -->
-        <table  tableName="scan_ending_improve" domainObjectName="scanEndingImprove"
+        <table  tableName="sys_role" domainObjectName="Role" schema="mobmanage"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
+               selectByExampleQueryId="false" >
+            <!--忽略schema的前缀-->
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
         </table>
 
     </context>
