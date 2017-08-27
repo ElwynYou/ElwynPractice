@@ -60,10 +60,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		String realmName = getName();
 		//4). 盐值. 
 		ByteSource credentialsSalt = ByteSource.Util.bytes(username);
-		
-		SimpleAuthenticationInfo info = null; //new SimpleAuthenticationInfo(principal, credentials, realmName);
-		info = new SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName);
-		return info;
+		return new SimpleAuthenticationInfo(principal, credentials, credentialsSalt, realmName);
 	}
 
 	public static void main(String[] args) {
