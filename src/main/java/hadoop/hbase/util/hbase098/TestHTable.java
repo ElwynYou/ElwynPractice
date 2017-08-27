@@ -1,6 +1,5 @@
 package hadoop.hbase.util.hbase098;
 
-import hadoop.hbase.util.hbase098.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.filter.FilterList;
@@ -28,7 +27,7 @@ public class TestHTable {
 
 	public static void main(String[] args) throws IOException {
 		Configuration configuration = HbaseUtil.getHBaseConfiguration();
-		HTable hTable = new HTable(configuration, "users");
+		HTable hTable = new HTable(configuration, "event_logs2");
 		try {
 			testscan(hTable);
 		} finally {

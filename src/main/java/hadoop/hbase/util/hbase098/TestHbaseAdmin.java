@@ -1,6 +1,5 @@
 package hadoop.hbase.util.hbase098;
 
-import hadoop.hbase.util.hbase098.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
@@ -21,7 +20,7 @@ public class TestHbaseAdmin {
         Configuration hBaseConfiguration = HbaseUtil.getHBaseConfiguration();
         HBaseAdmin hBaseAdmin = new HBaseAdmin(hBaseConfiguration);
         try {
-            testDelTableDescribe(hBaseAdmin);
+            testGetTableDescribe(hBaseAdmin);
 
         } finally {
             hBaseAdmin.close();
@@ -40,7 +39,7 @@ public class TestHbaseAdmin {
     }
 
     static void testGetTableDescribe(HBaseAdmin hBaseAdmin) throws IOException {
-        TableName tableName = TableName.valueOf("users");
+        TableName tableName = TableName.valueOf("event_logs");
         HTableDescriptor tableDescriptor;
         if (hBaseAdmin.tableExists(tableName)) {
             tableDescriptor = hBaseAdmin.getTableDescriptor(tableName);
@@ -52,7 +51,7 @@ public class TestHbaseAdmin {
     }
 
     static void testDelTableDescribe(HBaseAdmin hBaseAdmin) throws IOException {
-        TableName tableName = TableName.valueOf("data");
+        TableName tableName = TableName.valueOf("event_logs");
         if (hBaseAdmin.tableExists(tableName)) { //判断表是否存在
             if (hBaseAdmin.isTableEnabled(tableName)) {//判断表的状态是enable还是disable
                 hBaseAdmin.disableTable(tableName);
@@ -64,4 +63,6 @@ public class TestHbaseAdmin {
         }
 
     }
+
+
 }

@@ -1,18 +1,13 @@
 package hadoop.hbase.util;
 
-import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.ServerAddress;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public enum HBaseUtil2 {
 
@@ -27,7 +22,7 @@ public enum HBaseUtil2 {
 		configuration = HBaseConfiguration.create();
 		configuration.set("hbase.zookeeper.property.clientPort", "2181");
 		//配置zookeeper地址,多个用逗号分隔
-		configuration.set("hbase.zookeeper.quorum", "hadoop-master.nebuinfo.com");
+		configuration.set("hbase.zookeeper.quorum", "hadoop-senior.ibeifeng.com");
 		/*configuration.set("hbase.master", "hdfs://10.68.128.215:60000");
 		configuration.set("hbase.root.dir", "hdfs://10.68.128.215:9000/hbase");*/
 		try {
