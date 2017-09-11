@@ -5,6 +5,7 @@ import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.filter.*;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.zookeeper.common.IOUtils;
 
@@ -89,20 +90,28 @@ public class HBaseOperation {
         table.close();
     }
     public static void main(String[] args) throws IOException {
-        String tableName = "user"; //实际要加命名空间 default:user
+        String tableName = "event_logs"; //实际要加命名空间 default:user
         HTable table = null;
         ResultScanner scanner=null;
         try {
             table = getHTableByTableName(tableName);
             Scan scan=new Scan();
-            scan.setStartRow(Bytes.toBytes("10001"));
-            scan.setStopRow(Bytes.toBytes("10003"));
+            scan.setStartRow(Bytes.toBytes("1503676800000"));
+            scan.setStopRow(Bytes.toBytes("1503849600000"));
             //Scan scan1=new Scan(Bytes.toBytes("10001"),Bytes.toBytes("10003"));
 
          //   scan.setFilter(); 过滤器
           //  scan.setCacheBlocks();
          //   scan.setCaching();
+            FilterList filterList = new FilterList();
+            // 过滤数据，只分析launch事件
+            filterList.addFilter(new SingleColumnValueFilter(Bytes.toBytes(EventLogConstants.EVENT_LOGS_FAMILY_NAME), Bytes.toBytes(EventLogConstants.LOG_COLUMN_NAME_EVENT_NAME), CompareFilter.CompareOp.EQUAL, Bytes.toBytes("e_l")));
+            // 定义mapper中需要获取的列名
+            String[] columns = new String[] { EventLogConstants.LOG_COLUMN_NAME_EVENT_NAME, EventLogConstants.LOG_COLUMN_NAME_UUID, EventLogConstants.LOG_COLUMN_NAME_SERVER_TIME, EventLogConstants.LOG_COLUMN_NAME_PLATFORM, EventLogConstants.LOG_COLUMN_NAME_BROWSER_NAME, EventLogConstants.LOG_COLUMN_NAME_BROWSER_VERSION };
+            filterList.addFilter(getColumnFilter(columns));
 
+          //  scan.setAttribute(Scan.SCAN_ATTRIBUTES_TABLE_NAME, Bytes.toBytes(EventLogConstants.HBASE_NAME_EVENT_LOGS));
+            scan.setFilter(filterList);
 
 
              scanner = table.getScanner(scan);
@@ -126,5 +135,16 @@ public class HBaseOperation {
         }
 
 
+    }
+
+
+
+    private static Filter getColumnFilter(String[] columns) {
+        int length = columns.length;
+        byte[][] filter = new byte[length][];
+        for (int i = 0; i < length; i++) {
+            filter[i] = Bytes.toBytes(columns[i]);
+        }
+        return new MultipleColumnPrefixFilter(filter);
     }
 }
