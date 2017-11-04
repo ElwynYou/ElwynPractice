@@ -1,4 +1,4 @@
-package spark.sql;
+package spark.sqltest;
 
 import java.io.Serializable;
 
