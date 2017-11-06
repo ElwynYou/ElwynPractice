@@ -10,6 +10,7 @@
         <hive.version>0.13.1</hive.version>
         <!--  <hbase.version>0.98.6-hadoop2</hbase.version>-->
           <hbase.version>1.2.6</hbase.version>
+          <spark.version>2.0.2</spark.version>
         <org.springframework.version>4.2.8.RELEASE</org.springframework.version>
     </properties>
     <groupId>groupId</groupId>
@@ -193,6 +194,27 @@
             <groupId>com.101tec</groupId>
             <artifactId>zkclient</artifactId>
             <version>0.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.10</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_2.10</artifactId>
+            <version>2.0.2</version>
         </dependency>
 
     </dependencies>
