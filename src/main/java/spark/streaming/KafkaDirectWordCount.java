@@ -6,7 +6,7 @@ import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaPairInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
-import org.apache.spark.streaming.kafka.KafkaUtils;
+import org.apache.spark.streaming.kafka010.KafkaUtils;
 import scala.Tuple2;
 
 import java.util.*;
@@ -28,15 +28,16 @@ public class KafkaDirectWordCount {
         map.put("metadata.broker.list", "");
         Set<String> topic = new HashSet<>();
         topic.add("topic");
-        JavaPairInputDStream<String, String> directStream = KafkaUtils.createDirectStream(javaStreamingContext, String.class, String.class,
+        //0.8版本的api 10已经不适用
+       /* JavaPairInputDStream<String, String> directStream = KafkaUtils.createDirectStream(javaStreamingContext, String.class, String.class,
                 StringDecoder.class, StringDecoder.class, map, topic);
+
         directStream.flatMap(new FlatMapFunction<Tuple2<String, String>, String>() {
             @Override
             public Iterator<String> call(Tuple2<String, String> stringStringTuple2) throws Exception {
                 return Arrays.asList(stringStringTuple2._2.split(" ")).iterator();
             }
-        }).mapToPair(x -> new Tuple2<>(x, 1)).reduceByKey((x, y) -> x + y).print();
-
+        }).mapToPair(x -> new Tuple2<>(x, 1)).reduceByKey((x, y) -> x + y).print();*/
 
         //必须调用start方法才会开始
         javaStreamingContext.start();
