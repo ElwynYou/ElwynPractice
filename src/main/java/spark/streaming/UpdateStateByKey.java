@@ -21,12 +21,12 @@ import java.util.List;
  */
 public class UpdateStateByKey {
     public static void main(String[] args) throws InterruptedException {
-        SparkConf conf = new SparkConf().setMaster("local[2]").setAppName("WordCount");
+        SparkConf conf = new SparkConf().setAppName("UpdateStateByKey");
         JavaStreamingContext javaStreamingContext = new JavaStreamingContext(conf, Durations.seconds(5));
 
         //开启checkpoint 设置一个hdfs目录即可
-        javaStreamingContext.checkpoint("hdfs://fdsa");
-        JavaReceiverInputDStream<String> spark1 = javaStreamingContext.socketTextStream("spark1", 9999);
+        javaStreamingContext.checkpoint("hdfs://bigdata02.nebuinfo.com:8020/checkpoint_dir");
+        JavaReceiverInputDStream<String> spark1 = javaStreamingContext.socketTextStream("bigdata05.nebuinfo.com", 9999);
         JavaPairDStream<String, Integer> pairDStream = spark1.flatMap(line -> Arrays.asList(line.split(" ")).iterator()).mapToPair(x -> new Tuple2<>(x, 1));
         //基于缓存可以统计全局的计数累加
         //spark 维护一份全局的计数统计
@@ -52,7 +52,6 @@ public class UpdateStateByKey {
         });
         //updateStateByKey返回的javaPairDStream,其实就是代表了每个key的全局计数
         updateStateByKey.print();
-
         //必须调用start方法才会开始
         javaStreamingContext.start();
         //一直等待

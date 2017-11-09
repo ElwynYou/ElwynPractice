@@ -24,11 +24,12 @@ import java.util.Iterator;
 public class WordCount {
     public static void main(String[] args) throws InterruptedException {
         SparkConf conf = new SparkConf().setMaster("local[2]").setAppName("WordCount");
-        JavaStreamingContext javaStreamingContext = new JavaStreamingContext(conf, Durations.seconds(1));
-        JavaReceiverInputDStream<String> lines = javaStreamingContext.socketTextStream("localhost", 9999);
+        JavaStreamingContext javaStreamingContext = new JavaStreamingContext(conf, Durations.seconds(4));
+        JavaReceiverInputDStream<String> lines = javaStreamingContext.socketTextStream("bigdata05.nebuinfo.com", 9999);
         JavaDStream<String> words = lines.flatMap(new FlatMapFunction<String, String>() {
             @Override
             public Iterator<String> call(String s) throws Exception {
+
                 return Arrays.asList(s.split(" ")).iterator();
             }
         });
@@ -50,7 +51,7 @@ public class WordCount {
 
         //必须调用start方法才会开始
         javaStreamingContext.start();
-        //一直等待
+        //一直等待直到结束
         javaStreamingContext.awaitTermination();
         javaStreamingContext.close();
     }

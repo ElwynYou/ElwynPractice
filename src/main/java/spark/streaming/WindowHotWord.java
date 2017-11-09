@@ -21,7 +21,7 @@ import java.util.List;
  * @Email elonyong@163.com
  */
 public class WindowHotWord {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         SparkConf conf = new SparkConf().setMaster("local[2]").setAppName("WindowHotWord");
         JavaStreamingContext javaStreamingContext = new JavaStreamingContext(conf, Durations.seconds(5));
         JavaReceiverInputDStream<String> localhost = javaStreamingContext.socketTextStream("localhost", 9999);
@@ -75,5 +75,8 @@ public class WindowHotWord {
                     }
                 });
         stringObjectJavaPairDStream.print();
+        javaStreamingContext.start();
+        javaStreamingContext.awaitTermination();
+        javaStreamingContext.close();
     }
 }

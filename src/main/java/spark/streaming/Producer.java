@@ -22,6 +22,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
 import java.util.Properties;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 public class Producer extends Thread {
@@ -44,7 +45,7 @@ public class Producer extends Thread {
 	public void run() {
 		int messageNo = 1;
 		while (true) {
-			String messageStr = Math.round(Math.random()*100)+",test"+Math.round(Math.random()*200)+","+Math.round(Math.random()*5);
+			String messageStr = UUID.randomUUID().toString().substring(7)+",test"+Math.round(Math.random()*200)+","+Math.round(Math.random()*5);
 			long startTime = System.currentTimeMillis();
 			if (isAsync) { // Send asynchronously
 				producer.send(new ProducerRecord<>(topic,

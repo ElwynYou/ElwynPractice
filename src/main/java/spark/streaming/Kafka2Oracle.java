@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 /**
@@ -72,48 +73,28 @@ public class Kafka2Oracle {
 				serviceInfo.setServiceType(split[2]);
 				return serviceInfo;
 			}
-		}).print();/*.foreachRDD(new VoidFunction<JavaRDD<ServiceInfo>>() {
+		}).foreachRDD(new VoidFunction<JavaRDD<ServiceInfo>>() {
 			@Override
 			public void call(JavaRDD<ServiceInfo> serviceInfoJavaRDD) throws Exception {
 				serviceInfoJavaRDD.foreachPartition(new VoidFunction<Iterator<ServiceInfo>>() {
+					private static final long serialVersionUID = -7514277520610555351L;
+
 					@Override
 					public void call(Iterator<ServiceInfo> serviceInfoIterator) throws Exception {
-						*//*PreparedStatement preparedStatement = null;
-						Connection connection = ConnectionPool.getConnection();*//*
-
-							while (serviceInfoIterator.hasNext()) {
-								ServiceInfo next = serviceInfoIterator.next();
-								*//*String sql = "INSERT INTO service_info (service_code,service_name,service_type) VALUES(?,?,?)";
-								System.out.println(connection);
-								System.out.println("++++++++++++++++++++==============================");
-								connection.setAutoCommit(false);
-								preparedStatement = connection.prepareStatement(sql);
-								preparedStatement.setString(1, next.getServiceCode());
-								preparedStatement.setString(2, next.getServiceName());
-								preparedStatement.setString(3, next.getServiceType());
-								preparedStatement.addBatch();*//*
-								System.out.println(next);
-							}
-							*//*if (preparedStatement != null) {
-								preparedStatement.executeBatch();
-							}
-							if (connection != null) {
-								connection.commit();
-								connection.setAutoCommit(true);
-							}
-						} catch (SQLException e) {
-							e.printStackTrace();
-						} finally {
-							if (connection != null) {
-								ConnectionPool.returnConnection(connection);
-							}
-						}*//*
-
-
+						Connection connection = ConnectionPool.getConnection();
+						ServiceInfo next = null;
+						while (serviceInfoIterator.hasNext()) {
+							next = serviceInfoIterator.next();
+							String sql = "INSERT INTO service_info (service_code,service_name,service_type) VALUES('" + next.getServiceCode() + "','" + next
+									.getServiceName() + "','" + next.getServiceType() + "')";
+							Statement statement = connection.createStatement();
+							statement.execute(sql);
+						}
+						ConnectionPool.returnConnection(connection);
 					}
 				});
 			}
-		});*/
+		});
 
 
 //  可以打印所有信息，看下ConsumerRecord的结构
@@ -128,6 +109,7 @@ public class Kafka2Oracle {
 	}
 
 	private static class ServiceInfo implements Serializable {
+		private static final long serialVersionUID = -1077564698521477936L;
 		private String serviceCode;
 		private String serviceName;
 		private String serviceType;
