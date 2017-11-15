@@ -159,4 +159,19 @@ public class ScanEndingImprove implements Serializable {
 	public void setManufacturerCode(String manufacturerCode) {
 		this.manufacturerCode = manufacturerCode;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		ScanEndingImprove that = (ScanEndingImprove) o;
+
+		return imsi != null ? imsi.equals(that.imsi) : that.imsi == null;
+	}
+
+	@Override
+	public int hashCode() {
+		return imsi != null ? imsi.hashCode() : 0;
+	}
 }

@@ -1,41 +1,28 @@
 package spark.hbase;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.HBaseConfiguration;
-import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.Scan;
-import org.apache.hadoop.hbase.filter.CompareFilter;
-import org.apache.hadoop.hbase.filter.SingleColumnValueFilter;
 import org.apache.hadoop.hbase.io.ImmutableBytesWritable;
 import org.apache.hadoop.hbase.mapred.TableOutputFormat;
 import org.apache.hadoop.hbase.mapreduce.TableInputFormat;
 import org.apache.hadoop.hbase.protobuf.ProtobufUtil;
-import org.apache.hadoop.hbase.protobuf.generated.ClientProtos;
 import org.apache.hadoop.hbase.util.Base64;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.hbase.util.Triple;
-import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.yarn.webapp.hamlet.Hamlet;
 import org.apache.spark.SparkConf;
-import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.PairFunction;
-import org.apache.spark.rdd.RDD;
-import scala.Function1;
 import scala.Tuple2;
-import scala.runtime.BoxedUnit;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -86,10 +73,10 @@ public class SparkHbase  {
 		parallelize.mapToPair(new PairFunction<Triple<String, Integer, Integer>, ImmutableBytesWritable, Put>() {
 			@Override
 			public Tuple2<ImmutableBytesWritable, Put> call(Triple<String, Integer, Integer> stringIntegerIntegerTriple) throws Exception {
-				Put put = new Put(Bytes.toBytes("3"));
-				put.addColumn(Bytes.toBytes("info"), Bytes.toBytes("name"), Bytes.toBytes("1fdsa"));
-				put.addColumn(Bytes.toBytes("info"), Bytes.toBytes("age"), Bytes.toBytes("33"));
-				put.addColumn(Bytes.toBytes("info"), Bytes.toBytes("gender"), Bytes.toBytes("44"));
+				Put put = new Put(Bytes.toBytes("4"));
+				put.addColumn(Bytes.toBytes("info"), Bytes.toBytes("name"), Bytes.toBytes("haha"));
+				put.addColumn(Bytes.toBytes("info"), Bytes.toBytes("age"), Bytes.toBytes("haha"));
+				put.addColumn(Bytes.toBytes("info"), Bytes.toBytes("gender"), Bytes.toBytes("haha"));
 				return new Tuple2<>(new ImmutableBytesWritable(), put);
 			}
 		}).saveAsNewAPIHadoopDataset(newAPIJobConfiguration.getConfiguration());

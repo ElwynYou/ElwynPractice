@@ -22,7 +22,6 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
 import java.util.Properties;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 public class Producer extends Thread {
@@ -45,7 +44,10 @@ public class Producer extends Thread {
 	public void run() {
 		int messageNo = 1;
 		while (true) {
-			String messageStr = UUID.randomUUID().toString().substring(7)+",test"+Math.round(Math.random()*200)+","+Math.round(Math.random()*5);
+			//Utils.sleep(100);
+			String messageStr ="{\"createTime\":\"2017-11-13 16:35:41\",\"status\":0,\"captureTime\":\"2017-11-13 04:35:39\",\"longitude\":\"120.355561\"," +
+					"\"latitude\":\"30.693477\",\"firstTime\":\"2017-11-12 04:35:39\",\"lastTime\":\"2017-11-13 04:35:39\",\"moduleMac\":\"185F23BD924C\"," +
+					"\"imsi\":\"460038624780"+Math.round(Math.random()*10)+"\",\"isp\":\"5\",\"distance\":\"1\",\"snCode\":\"EN1801E116480362\",\"manufacturerCode\":\"79094740\"}";
 			long startTime = System.currentTimeMillis();
 			if (isAsync) { // Send asynchronously
 				producer.send(new ProducerRecord<>(topic,
@@ -62,12 +64,13 @@ public class Producer extends Thread {
 				}
 			}
 			++messageNo;
+
 		}
 	}
 
 	public static void main(String[] args) {
 		boolean isAsync = args.length == 0 || !args[0].trim().equalsIgnoreCase("sync");
-		Producer producerThread = new Producer("topicName", isAsync);
+		Producer producerThread = new Producer("scanEnding", isAsync);
 		producerThread.start();
 	}
 
@@ -101,6 +104,9 @@ class DemoCallBack implements Callback {
 					"message(" + key + ", " + message + ") sent to partition(" + metadata.partition() +
 							"), " +
 							"offset(" + metadata.offset() + ") in " + elapsedTime + " ms");
+			if (key==100000) {
+				System.exit(0);
+			}
 		} else {
 			exception.printStackTrace();
 		}

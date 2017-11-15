@@ -10,4 +10,7 @@ mac|#|imsi|#|捕获时间|#|isp(手机号运营商)|#|设备编码|#|经度|#|�
 
 
 
-{"createTime":"2017-11-13 16:35:41","status":0,"captureTime":"2017-11-13 04:35:39","longitude":"120.355561","latitude":"30.693477","firstTime":"2017-11-12 04:35:39","lastTime":"2017-11-13 04:35:39","moduleMac":"185F23BD924C","imsi":"460038624780176","isp":"5","distance":"1","snCode":"EN1801E116480362","manufacturerCode":"79094740"}
+{"createTime":"2017-11-13 16:35:41","status":0,"captureTime":"2017-11-13 04:35:39",
+"longitude":"120.355561","latitude":"30.693477","firstTime":"2017-11-12 04:35:39",
+"lastTime":"2017-11-13 04:35:39","moduleMac":"185F23BD924C","imsi":"460038624780176",
+"isp":"5","distance":"1","snCode":"EN1801E116480362","manufacturerCode":"79094740"}

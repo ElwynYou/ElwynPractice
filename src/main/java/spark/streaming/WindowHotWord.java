@@ -20,7 +20,7 @@ import java.util.List;
  * @Date 2017/11/8 21:52
  * @Email elonyong@163.com
  */
-public class WindowHotWord {
+public class WindowHotWord  {
     public static void main(String[] args) throws InterruptedException {
         SparkConf conf = new SparkConf().setMaster("local[2]").setAppName("WindowHotWord");
         JavaStreamingContext javaStreamingContext = new JavaStreamingContext(conf, Durations.seconds(5));

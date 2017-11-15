@@ -1,6 +1,11 @@
 package spark;
 
+import spark.streaming.ConnectionPool;
+
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * @Name spark.ServiceInfo
@@ -10,9 +15,9 @@ import java.io.Serializable;
  * @Copyright 上海云辰信息科技有限公司
  **/
 public class ServiceInfo implements Serializable {
-	private String serviceCode="";
-	private String serviceName="";
-	private String serviceType="";
+	private String serviceCode = "";
+	private String serviceName = "";
+	private String serviceType = "";
 
 	public ServiceInfo() {
 	}
@@ -55,4 +60,29 @@ public class ServiceInfo implements Serializable {
 				", serviceType='" + serviceType + '\'' +
 				'}';
 	}
+
+	public static void main(String[] args) throws SQLException {
+		Connection connection = ConnectionPool.getConnection();
+		//遍历partition中的数据,使用一个链接,插入数据库
+		String imsi = "fdsafdsafdsa";
+		Long nums = 3321L;
+		System.out.println(imsi + nums);
+		String sql = "MERGE INTO imsi_count a " +
+				"USING (SELECT " + imsi + " AS imsi," + nums + " AS nums FROM dual) b " +
+				"ON ( a.imsi=b.imsi) " +
+				"WHEN MATCHED THEN " +
+				"    UPDATE SET a.nums = b.nums " +
+				"WHEN NOT MATCHED THEN  " +
+				"    INSERT (imsi,nums) VALUES(b.imsi,b.nums)";
+		System.out.println(sql);
+		Statement statement = connection.createStatement();
+		try {
+			statement.execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ConnectionPool.returnConnection(connection);
+
+	}
+
 }
